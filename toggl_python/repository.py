@@ -114,7 +114,7 @@ class BaseRepository(Api):
                 entity,
                 headers=self.HEADERS,
                 params=params,
-                data_key="data",
+                data_key="",
             )
         else:
             raise NotSupported
@@ -123,7 +123,7 @@ class BaseRepository(Api):
         self,
         _url: Union[str, httpx.URL],
         entity_class: Any,
-        data_key: Optional[str] = "data",
+        data_key: Optional[str],
         **kwargs: Any,
     ) -> Any:
         params = kwargs
@@ -229,7 +229,7 @@ class Tasks(BaseRepository):
 
 
 class TimeEntries(BaseRepository):
-    LIST_URL = "time_entries"
+    LIST_URL = "me/time_entries"
     ENTITY_CLASS = TimeEntry
 
 

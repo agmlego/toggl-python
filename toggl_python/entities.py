@@ -11,18 +11,18 @@ class BaseEntity(BaseModel):
 
 class Client(BaseEntity):
     name: str
-    wid: int
+    workspace_id: int
     notes: Optional[str] = None
 
 
 class Group(BaseEntity):
     name: str
-    wid: int
+    workspace_id: int
 
 
 class Project(BaseEntity):
     name: str
-    wid: int
+    workspace_id: int
     cid: Optional[int] = None
     active: bool = True
     is_private: bool = True
@@ -39,7 +39,7 @@ class Project(BaseEntity):
 class ProjectUser(BaseEntity):
     pid: int
     uid: int
-    wid: int
+    workspace_id: int
     notes: Optional[str] = None
     manage: Optional[bool] = False
     rate: Optional[float] = None
@@ -48,20 +48,20 @@ class ProjectUser(BaseEntity):
 
 class Tag(BaseEntity):
     name: str
-    wid: int
+    workspace_id: int
 
 
 class Task(BaseEntity):
     name: str
     pid: int
-    wid: int
+    workspace_id: int
     uid: Optional[int] = None
     estimated_seconds: Optional[int] = None
     active: Optional[bool] = True
 
 
 class TimeEntry(BaseEntity):
-    wid: int
+    workspace_id: int
     pid: Optional[int] = None
     tid: Optional[int] = None
     description: Optional[str] = None
@@ -70,12 +70,12 @@ class TimeEntry(BaseEntity):
     stop: Optional[Union[datetime, Callable[[], datetime]]] = None
     duration: int
     created_with: Optional[str]
-    tags: List[str] = []
+    tags: Optional[List[str]] = []
     duronly: Optional[bool] = None
 
 
 class ReportTimeEntry(BaseEntity):
-    wid: Optional[int] = None
+    workspace_id: Optional[int] = None
     pid: Optional[int] = None
     tid: Optional[int] = None
     uid: Optional[int] = None
@@ -91,7 +91,7 @@ class ReportTimeEntry(BaseEntity):
 
 class User(BaseEntity):
     api_token: Optional[str] = None
-    default_wid: Optional[int] = None
+    default_workspace_id: Optional[int] = None
     email: EmailStr
     fullname: str
     jquery_timeofday_format: str
@@ -115,7 +115,7 @@ class Workspace(BaseEntity):
     name: str
     premium: bool
     admin: bool
-    default_hourly_rate: float
+    default_hourly_rate: Optional[float]
     default_currency: str
     only_admins_may_create_projects: bool
     only_admins_see_billable_rates: bool
@@ -126,7 +126,7 @@ class Workspace(BaseEntity):
 
 class WorkspaceUser(BaseEntity):
     uid: int
-    wid: int
+    workspace_id: int
     admin: bool
     active: bool
     name: Optional[str] = None
